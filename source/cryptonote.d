@@ -44,8 +44,7 @@ version(unittest)
     }
 }
 
-// export cryptonote lib to D in private section
-// lib must be used through LibCryptonote static class
+
 private
 {
     extern (C):
