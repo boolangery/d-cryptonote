@@ -1,0 +1,56 @@
+{
+	"name": "cryptonote",
+	"authors": [
+		"Eliott Dumeix",
+		"Oliver Weichhold",
+		"Brian Gladman",
+		"The Monero Project",
+		"others..."
+	],
+	"description": "d binding for cryptonote hash library (exposed by coinfoundry/miningcore)",
+	"copyright": "Copyright © 2018, Eliott Dumeix",
+	"license": "MIT",
+	"targetType": "library",
+	"configurations": [
+		{
+			"name": "static",
+			"platforms": ["linux"],
+			"preBuildCommands": ["make -C ./lib/libcryptonote libcryptonote.a"],
+			"importPaths": ["lib/libcryptonote"],
+			"lflags": ["-Llib/libcryptonote"],
+			"libs": [
+				"cryptonote",
+				"boost_system",
+				"boost_date_time",
+				"stdc++"
+			],
+			"systemDependencies": "boost-devel"
+		},
+		{
+			"name": "shared",
+			"platforms": ["linux"],
+			"libs": [
+				"cryptonote",
+				"boost_system",
+				"boost_date_time",
+				"stdc++"
+			],
+			"systemDependencies": "boost-devel"
+		},
+		{
+			"name": "unittest",
+			"dependencies": {"dunit": "~>1.0.14"},
+			"platforms": ["linux"],
+			"preBuildCommands": ["make -C ./lib/libcryptonote libcryptonote.a"],
+			"importPaths": ["lib/libcryptonote"],
+			"lflags": ["-Llib/libcryptonote"],
+			"libs": [
+				"cryptonote",
+				"boost_system",
+				"boost_date_time",
+				"stdc++"
+			],
+			"systemDependencies": "boost-devel"
+		}
+	]
+}
