@@ -1,0 +1,6 @@
+.dub
+.idea
+dub.selections.json
+cryptonote-test-unittest
+libcryptonote.a
+
