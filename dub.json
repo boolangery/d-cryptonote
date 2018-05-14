@@ -7,24 +7,49 @@
 		"The Monero Project",
 		"others..."
 	],
-	"description": "d binding for cryptonote hash library (exposed by coinfoundry/miningcore)",
+	"description": "D binding for cryptonote hash library (exposed by coinfoundry/miningcore)",
 	"copyright": "Copyright © 2018, Eliott Dumeix",
 	"license": "MIT",
 	"targetType": "library",
+	"systemDependencies": "boost-devel",
 	"configurations": [
 		{
 			"name": "static",
 			"platforms": ["linux"],
-			"preBuildCommands": ["make -C ./lib/libcryptonote libcryptonote.a"],
-			"importPaths": ["lib/libcryptonote"],
-			"lflags": ["-Llib/libcryptonote"],
+			"preBuildCommands": ["make -C $PACKAGE_DIR/lib/libcryptonote libcryptonote.a"],
+			"sourceFiles": [
+				"lib/libcryptonote/exports.o",
+				"lib/libcryptonote/cryptonote_basic/cryptonote_format_utils.o",
+				"lib/libcryptonote/crypto/random.o",
+				"lib/libcryptonote/crypto/oaes_lib.o",
+				"lib/libcryptonote/crypto/slow-hash-lite.o",
+				"lib/libcryptonote/crypto/aesb.o",
+				"lib/libcryptonote/crypto/slow-hash.o",
+				"lib/libcryptonote/crypto/jh.o",
+				"lib/libcryptonote/crypto/hash-extra-blake.o",
+				"lib/libcryptonote/crypto/keccak.o",
+				"lib/libcryptonote/crypto/crypto-ops-data.o",
+				"lib/libcryptonote/crypto/hash.o",
+				"lib/libcryptonote/crypto/groestl.o",
+				"lib/libcryptonote/crypto/skein.o",
+				"lib/libcryptonote/crypto/hash-extra-jh.o",
+				"lib/libcryptonote/crypto/hash-extra-skein.o",
+				"lib/libcryptonote/crypto/crypto-ops.o",
+				"lib/libcryptonote/crypto/blake256.o",
+				"lib/libcryptonote/crypto/chacha.o",
+				"lib/libcryptonote/crypto/crypto.o",
+				"lib/libcryptonote/crypto/tree-hash.o",
+				"lib/libcryptonote/crypto/hash-extra-groestl.o",
+				"lib/libcryptonote/common/base58.o",
+				"lib/libcryptonote/contrib/epee/src/hex.o",
+				"lib/libcryptonote/contrib/epee/src/memwipe.o"
+			],
 			"libs": [
-				"cryptonote",
+				"dl",
 				"boost_system",
 				"boost_date_time",
 				"stdc++"
-			],
-			"systemDependencies": "boost-devel"
+			]
 		},
 		{
 			"name": "shared",
@@ -34,23 +59,46 @@
 				"boost_system",
 				"boost_date_time",
 				"stdc++"
-			],
-			"systemDependencies": "boost-devel"
+			]
 		},
 		{
 			"name": "unittest",
 			"dependencies": {"dunit": "~>1.0.14"},
-			"platforms": ["linux"],
-			"preBuildCommands": ["make -C ./lib/libcryptonote libcryptonote.a"],
-			"importPaths": ["lib/libcryptonote"],
-			"lflags": ["-Llib/libcryptonote"],
-			"libs": [
-				"cryptonote",
-				"boost_system",
-				"boost_date_time",
-				"stdc++"
-			],
-			"systemDependencies": "boost-devel"
+          	"platforms": ["linux"],
+          	"preBuildCommands": ["make -C $PACKAGE_DIR/lib/libcryptonote libcryptonote.a"],
+          	"sourceFiles": [
+          	  "lib/libcryptonote/exports.o",
+          	  "lib/libcryptonote/cryptonote_basic/cryptonote_format_utils.o",
+          	  "lib/libcryptonote/crypto/random.o",
+          	  "lib/libcryptonote/crypto/oaes_lib.o",
+          	  "lib/libcryptonote/crypto/slow-hash-lite.o",
+          	  "lib/libcryptonote/crypto/aesb.o",
+          	  "lib/libcryptonote/crypto/slow-hash.o",
+          	  "lib/libcryptonote/crypto/jh.o",
+          	  "lib/libcryptonote/crypto/hash-extra-blake.o",
+          	  "lib/libcryptonote/crypto/keccak.o",
+          	  "lib/libcryptonote/crypto/crypto-ops-data.o",
+          	  "lib/libcryptonote/crypto/hash.o",
+          	  "lib/libcryptonote/crypto/groestl.o",
+          	  "lib/libcryptonote/crypto/skein.o",
+          	  "lib/libcryptonote/crypto/hash-extra-jh.o",
+          	  "lib/libcryptonote/crypto/hash-extra-skein.o",
+          	  "lib/libcryptonote/crypto/crypto-ops.o",
+          	  "lib/libcryptonote/crypto/blake256.o",
+          	  "lib/libcryptonote/crypto/chacha.o",
+          	  "lib/libcryptonote/crypto/crypto.o",
+          	  "lib/libcryptonote/crypto/tree-hash.o",
+          	  "lib/libcryptonote/crypto/hash-extra-groestl.o",
+          	  "lib/libcryptonote/common/base58.o",
+          	  "lib/libcryptonote/contrib/epee/src/hex.o",
+          	  "lib/libcryptonote/contrib/epee/src/memwipe.o"
+          	],
+          	"libs": [
+          	  "dl",
+          	  "boost_system",
+          	  "boost_date_time",
+          	  "stdc++"
+          	]
 		}
 	]
 }
