@@ -7,24 +7,27 @@
 		"The Monero Project",
 		"others..."
 	],
-	"description": "d binding for cryptonote hash library (exposed by coinfoundry/miningcore)",
+	"description": "D binding for cryptonote hash library (exposed by coinfoundry/miningcore)",
 	"copyright": "Copyright © 2018, Eliott Dumeix",
 	"license": "MIT",
 	"targetType": "library",
+	"systemDependencies": "boost-devel",
 	"configurations": [
 		{
 			"name": "static",
 			"platforms": ["linux"],
-			"preBuildCommands": ["make -C ./lib/libcryptonote libcryptonote.a"],
+			"preBuildCommands": [
+				"make -C $PACKAGE_DIR/lib/libcryptonote libcryptonote.a"
+			],
 			"importPaths": ["lib/libcryptonote"],
-			"lflags": ["-Llib/libcryptonote"],
+			"lflags": ["-L$PACKAGE_DIR/lib/libcryptonote/"],
 			"libs": [
 				"cryptonote",
+				"dl",
 				"boost_system",
 				"boost_date_time",
 				"stdc++"
-			],
-			"systemDependencies": "boost-devel"
+			]
 		},
 		{
 			"name": "shared",
@@ -34,23 +37,24 @@
 				"boost_system",
 				"boost_date_time",
 				"stdc++"
-			],
-			"systemDependencies": "boost-devel"
+			]
 		},
 		{
 			"name": "unittest",
 			"dependencies": {"dunit": "~>1.0.14"},
-			"platforms": ["linux"],
-			"preBuildCommands": ["make -C ./lib/libcryptonote libcryptonote.a"],
+          	"platforms": ["linux"],
+			"preBuildCommands": [
+				"make -C $PACKAGE_DIR/lib/libcryptonote libcryptonote.a"
+			],
 			"importPaths": ["lib/libcryptonote"],
-			"lflags": ["-Llib/libcryptonote"],
+			"lflags": ["-L$PACKAGE_DIR/lib/libcryptonote/"],
 			"libs": [
 				"cryptonote",
+				"dl",
 				"boost_system",
 				"boost_date_time",
 				"stdc++"
-			],
-			"systemDependencies": "boost-devel"
+			]
 		}
 	]
 }
