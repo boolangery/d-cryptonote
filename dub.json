@@ -19,7 +19,6 @@
 			"preBuildCommands": [
 				"make -C $PACKAGE_DIR/lib/libcryptonote libcryptonote.a"
 			],
-			"importPaths": ["lib/libcryptonote"],
 			"lflags": ["-L$PACKAGE_DIR/lib/libcryptonote/"],
 			"libs": [
 				"cryptonote",
@@ -46,7 +45,6 @@
 			"preBuildCommands": [
 				"make -C $PACKAGE_DIR/lib/libcryptonote libcryptonote.a"
 			],
-			"importPaths": ["lib/libcryptonote"],
 			"lflags": ["-L$PACKAGE_DIR/lib/libcryptonote/"],
 			"libs": [
 				"cryptonote",
