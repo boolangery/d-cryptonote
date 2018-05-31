@@ -1,5 +1,7 @@
 # d-cryptonote
 
+[![DUB Package](https://img.shields.io/dub/v/cryptonote.svg)](https://code.dlang.org/packages/cryptonote)
+
 `d-cryptonote` is a wrapper of cryptonote C++ library written by:
     - The Monero Project
     - Brian Gladman
