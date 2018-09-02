@@ -22,9 +22,11 @@ import std.conv;
 import std.typecons;
 import std.stdio;
 
+version(unittest) { import unit_threaded; }
+else              { enum ShouldFail; } // so production builds compile
+
 version(unittest)
 {
-    import dunit.toolkit;
     import std.exception: assertThrown;
     import core.exception: AssertError;
 
@@ -111,7 +113,7 @@ unittest // convertBlob
 
     string s = result.toHexString();
 
-    assertEqual("0106E5B3AFD505583CF50BCC743D04D831D2B119DC94AD88679E359076EE3F18D258EE138B3B421C0300A4487286E262E95B8D2163A0C8B73527E8C9425ADBDC4E532CF0EF4241F9FFBE9E01", s);
+    s.should == "0106E5B3AFD505583CF50BCC743D04D831D2B119DC94AD88679E359076EE3F18D258EE138B3B421C0300A4487286E262E95B8D2163A0C8B73527E8C9425ADBDC4E532CF0EF4241F9FFBE9E01";
 }
 
 static ulong decodeAddress(string address)
@@ -130,7 +132,7 @@ unittest // DecodeAddress
     string address = "48nhyWcSey31ngSEhV8j8NPm6B8PistCQJBjjDjmTvRSTWYg6iocAw131vE2JPh3ps33vgQDKLrUx3fcErusYWcMJBxpm1d";
     ulong result = decodeAddress(address);
 
-    assertEqual(18uL, result);
+    result.should == 18uL;
 }
 
 static ulong decodeIntegratedAddress(string address)
@@ -149,7 +151,7 @@ unittest // decodeIntegratedAddress
     string address = "4BrL51JCc9NGQ71kWhnYoDRffsDZy7m1HUU7MRU4nUMXAHNFBEJhkTZV9HdaL4gfuNBxLPc3BeMkLGaPbF5vWtANQsGwTGg55Kq4p3ENE7";
     ulong result = decodeIntegratedAddress(address);
 
-    assertEqual(19uL, result);
+    result.should == 19uL;
 }
 
 static ubyte[] cryptonightHashSlow(ubyte[] data, int variant)
@@ -169,7 +171,7 @@ unittest // cryptonightHashSlow
     ubyte[] blobConverted = "0106A2AAAFD505583CF50BCC743D04D831D2B119DC94AD88679E359076EE3F18D258EE138B3B42580100A4B1E2F4BAF6AB7109071AB59BC52DBA740D1DE99FA0AE0C4AFD6EA9F40C5D87EC01".hexToBytes();
     string result = cryptonightHashSlow(blobConverted, 0).toHexString();
 
-    assertEqual("A845FFBDF83AE9A8FFA504A1011EFBD5ED2294BB9DA591D3B583740568402C00", result);
+    result.should == "A845FFBDF83AE9A8FFA504A1011EFBD5ED2294BB9DA591D3B583740568402C00";
 
     assertThrown!AssertError(cryptonightHashSlow(null, 0));
 
@@ -192,7 +194,7 @@ unittest // cryptonightHashSlowLite
     ubyte[] blobConverted = "0106F1ADAFD505583CF50BCC743D04D831D2B119DC94AD88679E359076EE3F18D258EE138B3B42597710C48C6D885E2622F40F82ECD9B9FD538F28DF9B0557E07CD3237A31C76569ADA98001".hexToBytes();
     string result = cryptonightHashSlowLite(blobConverted).toHexString();
 
-    assertEqual("0769CAEE428A232CFFB76FA200F174FF962734F24E7B3BF8D1B0D4E8BA6CEEBF", result);
+    result.should == "0769CAEE428A232CFFB76FA200F174FF962734F24E7B3BF8D1B0D4E8BA6CEEBF";
 }
 
 static ubyte[] cryptonightHashFast(ubyte[] data)
@@ -212,5 +214,5 @@ unittest // cryptonightHashFast
     ubyte[] blobConverted = "0106A2AAAFD505583CF50BCC743D04D831D2B119DC94AD88679E359076EE3F18D258EE138B3B42580100A4B1E2F4BAF6AB7109071AB59BC52DBA740D1DE99FA0AE0C4AFD6EA9F40C5D87EC01".hexToBytes();
     string result = cryptonightHashFast(blobConverted).toHexString();
 
-    assertEqual("DDC0E3A33B605CE39FA2D16A98D7634E33399AB1E4B56B3BDD3414B655FE9A98", result);
+    result.should == "DDC0E3A33B605CE39FA2D16A98D7634E33399AB1E4B56B3BDD3414B655FE9A98";
 }

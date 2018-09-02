@@ -41,7 +41,7 @@
 		{
 			"name": "unittest",
           	"platforms": ["linux"],
-			"dependencies": {"dunit": "~>1.0.14"},
+			"dependencies": {"unit-threaded": "*"},
 			"preBuildCommands": [
 				"make -C $PACKAGE_DIR/lib/libcryptonote libcryptonote.a"
 			],
