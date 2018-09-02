@@ -40,7 +40,8 @@
 		},
 		{
 			"name": "unittest",
-          		"platforms": ["linux"],
+          	"platforms": ["linux"],
+			"dependencies": {"dunit": "~>1.0.14"},
 			"preBuildCommands": [
 				"make -C $PACKAGE_DIR/lib/libcryptonote libcryptonote.a"
 			],
@@ -53,10 +54,5 @@
 				"stdc++"
 			]
 		}
-	],
-	"buildTypes": {
-		"unittest": {
-			"dependencies": {"dunit": "~>1.0.14"}
-		}
-	}
+	]
 }
